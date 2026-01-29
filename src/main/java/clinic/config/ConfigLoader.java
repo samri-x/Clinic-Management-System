@@ -8,7 +8,7 @@ public class ConfigLoader {
     private static Properties props = new Properties();
 
     static {
-        try (FileInputStream fis = new FileInputStream("src/main/java/clinic/config.properties")) {
+        try (FileInputStream fis = new FileInputStream("src/main/resources/config.properties")) {
             props.load(fis);
         } catch (IOException e) {
             e.printStackTrace();
