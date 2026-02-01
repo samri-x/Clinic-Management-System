@@ -9,7 +9,7 @@ public class ConfigLoader {
 
     static {
         try (InputStream input = ConfigLoader.class.getClassLoader()
-                .getResourceAsStream("src/main/config.properties")) {
+                .getResourceAsStream("config.properties")) {
             if (input != null) {
                 props.load(input);
             } else {
