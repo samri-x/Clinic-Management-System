@@ -26,7 +26,14 @@ public class Doctor extends Person implements User {
     public void setName(String name) {
         this.name = name;
     } public void setSpecialization(String specialization) {
+
         this.specialization = specialization;
+    }
+    public int getId() {
+        return id;
+    } // NEW Setter
+    public void setId(int id) {
+        this.id = id;
     }
     @Override
     public String getRole() {
