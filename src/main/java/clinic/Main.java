@@ -12,7 +12,7 @@ public class Main extends Application {
         DataStore.loadAll();
 
         stage.setTitle("Clinic Management System");
-        stage.setScene(new Scene(new LoginView(stage), 1000, 800));
+        stage.setScene(new Scene(new LoginView(stage), 1000, 600));
         stage.show();
     }
 
