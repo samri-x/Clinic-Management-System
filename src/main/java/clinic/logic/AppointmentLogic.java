@@ -19,19 +19,21 @@ public class AppointmentLogic {
                 appointmentDate.toString()
         );
         DataStore.addAppointment(a);
+        System.out.println("Appointment added and saved to file.");
     }
 
     public static void removeAppointment(Appointment appointment) {
-        DataStore.appointments.remove(appointment);
+        if (appointment != null) {
+            DataStore.removeAppointment(appointment);
+            System.out.println("Appointment removed and saved to file.");
+        }
     }
-
-
 
     public static void updateAppointment(Appointment appointment, String newDate, Doctor newDoctor) throws AppointmentAddingException {
         if (appointment == null) return;
 
         if (newDate != null && !newDate.trim().isEmpty()) {
-            // Basic validation: date format should be YYYY-MM-DD
+
             if (!newDate.matches("\\d{4}-\\d{2}-\\d{2}")) {
                 throw new AppointmentAddingException("Date must be in format YYYY-MM-DD.");
             }
@@ -41,11 +43,11 @@ public class AppointmentLogic {
         if (newDoctor != null) {
             appointment.setDoctor(newDoctor);
         }
+
+
+        DataStore.saveAppointments();
+        System.out.println("Appointment updated and saved to file.");
     }
-
-
-
-
 
     private static LocalDate validateAppointment(Patient patient, Doctor doctor, String dateText) throws AppointmentAddingException {
         if (patient == null) {
