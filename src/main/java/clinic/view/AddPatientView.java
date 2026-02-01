@@ -30,7 +30,7 @@ public class AddPatientView extends BorderPane {
         age.setMaxWidth(350);
 
         ComboBox<String> gender = new ComboBox<>();
-        gender.getItems().addAll("Male", "Female", "Other");
+        gender.getItems().addAll("Male", "Female");
         gender.setPromptText("Select Gender");
         gender.setMaxWidth(350);
 
