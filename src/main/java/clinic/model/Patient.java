@@ -18,38 +18,55 @@ public class Patient extends Person {
     }
 
     public int getAge() {
+
         return age;
     }
     public String getGender() {
+
         return gender;
     }
     public String getPhone() {
+
         return phone;
     }
     public String getAddress() {
+
         return address;
     }
     public String getBloodType() {
+
         return bloodType;
     }
 
     public void setName(String name) {
+
         this.name = name;
     }
     public void setAge(int age) {
+
         this.age = age;
     }
     public void setGender(String gender) {
+
         this.gender = gender;
     }
     public void setPhone(String phone) {
+
         this.phone = phone;
     }
     public void setAddress(String address) {
         this.address = address;
     }
     public void setBloodType(String bloodType) {
+
         this.bloodType = bloodType;
+    }
+
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
     }
 
 
