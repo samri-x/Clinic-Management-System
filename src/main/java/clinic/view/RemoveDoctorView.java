@@ -19,7 +19,8 @@ public class RemoveDoctorView extends BorderPane {
         title.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2d3748;");
 
         TableView<Doctor> doctorTable = new TableView<>();
-        doctorTable.setItems(FXCollections.observableArrayList(clinic.data.DataStore.doctors));
+        // Bind directly to the actual DataStore list
+        doctorTable.setItems(FXCollections.observableList(clinic.data.DataStore.doctors));
 
         TableColumn<Doctor, String> nameCol = new TableColumn<>("Name");
         nameCol.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getName()));
@@ -55,24 +56,21 @@ public class RemoveDoctorView extends BorderPane {
 
         setCenter(card);
 
-
-
         remove.setOnAction(e -> {
             Doctor selected = doctorTable.getSelectionModel().getSelectedItem();
             if (selected != null) {
-                DoctorLogic.removeDoctor(selected);
-                doctorTable.getItems().remove(selected);
-
+                DoctorLogic.removeDoctor(selected); // updates DataStore and CSV
+                doctorTable.refresh();              // force redraw
                 new Alert(Alert.AlertType.INFORMATION,
                         "Doctor removed successfully!", ButtonType.OK).showAndWait();
             } else {
                 errorLabel.setText("❌ Please select a doctor to remove.");
                 errorLabel.setVisible(true);
-
                 new Alert(Alert.AlertType.ERROR,
                         "No doctor selected.", ButtonType.OK).showAndWait();
             }
         });
+
 
         back.setOnAction(e -> setCenter(new Label("Select an option from the menu")));
     }
