@@ -109,4 +109,5 @@ public class AdminMenu extends BorderPane {
         setLeft(menuBox);
         setCenter(contentWrapper);
     }
+    
 }
