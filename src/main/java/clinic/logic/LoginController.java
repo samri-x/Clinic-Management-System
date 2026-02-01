@@ -5,6 +5,7 @@ import clinic.model.Doctor;
 import clinic.exceptions.LoginException;
 import clinic.config.ConfigLoader;
 
+
 public class LoginController {
 
     public static Object authenticate(String role, String username, String password) throws LoginException {
