@@ -1,5 +1,4 @@
 package clinic.view;
-
 import clinic.logics.PatientLogic;
 import clinic.model.Patient;
 import javafx.geometry.Insets;
@@ -20,7 +19,8 @@ public class RemovePatientView extends BorderPane {
         title.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2d3748;");
 
         TableView<Patient> patientTable = new TableView<>();
-        patientTable.setItems(FXCollections.observableArrayList(clinic.data.DataStore.patients));
+
+        patientTable.setItems(FXCollections.observableList(clinic.data.DataStore.patients));
 
         TableColumn<Patient, String> nameCol = new TableColumn<>("Name");
         nameCol.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getName()));
@@ -62,19 +62,16 @@ public class RemovePatientView extends BorderPane {
 
         setCenter(card);
 
-
         remove.setOnAction(e -> {
             Patient selected = patientTable.getSelectionModel().getSelectedItem();
             if (selected != null) {
                 PatientLogic.removePatient(selected);
-                patientTable.getItems().remove(selected);
-
+                patientTable.refresh();
                 new Alert(Alert.AlertType.INFORMATION,
                         "Patient removed successfully!", ButtonType.OK).showAndWait();
             } else {
                 errorLabel.setText("❌ Please select a patient to remove.");
                 errorLabel.setVisible(true);
-
                 new Alert(Alert.AlertType.ERROR,
                         "No patient selected.", ButtonType.OK).showAndWait();
             }
