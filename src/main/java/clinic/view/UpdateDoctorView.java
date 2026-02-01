@@ -21,7 +21,8 @@ public class UpdateDoctorView extends BorderPane {
         title.setFont(Font.font("Segoe UI", FontWeight.BOLD, 24));
 
         TableView<Doctor> doctorTable = new TableView<>();
-        doctorTable.setItems(FXCollections.observableArrayList(clinic.data.DataStore.doctors));
+        // Bind directly to the actual DataStore list
+        doctorTable.setItems(FXCollections.observableList(clinic.data.DataStore.doctors));
 
         TableColumn<Doctor, String> nameCol = new TableColumn<>("Name");
         nameCol.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getName()));
@@ -45,7 +46,7 @@ public class UpdateDoctorView extends BorderPane {
             Doctor selected = doctorTable.getSelectionModel().getSelectedItem();
             if (selected != null) {
                 DoctorLogic.updateDoctor(selected, nameField.getText(), specField.getText());
-                doctorTable.refresh();
+                doctorTable.refresh(); // redraws updated values
                 new Alert(Alert.AlertType.INFORMATION, "Doctor updated successfully!", ButtonType.OK).showAndWait();
             } else {
                 new Alert(Alert.AlertType.ERROR, "No doctor selected.", ButtonType.OK).showAndWait();
