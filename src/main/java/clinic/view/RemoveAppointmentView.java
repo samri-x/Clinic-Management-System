@@ -1,5 +1,4 @@
 package clinic.view;
-
 import clinic.logics.AppointmentLogic;
 import clinic.model.Appointment;
 import javafx.collections.FXCollections;
@@ -20,7 +19,8 @@ public class RemoveAppointmentView extends BorderPane {
         title.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2d3748;");
 
         TableView<Appointment> appointmentTable = new TableView<>();
-        appointmentTable.setItems(FXCollections.observableArrayList(clinic.data.DataStore.appointments));
+
+        appointmentTable.setItems(FXCollections.observableList(clinic.data.DataStore.appointments));
 
         TableColumn<Appointment, String> patientCol = new TableColumn<>("Patient");
         patientCol.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getPatient().getName()));
@@ -53,19 +53,16 @@ public class RemoveAppointmentView extends BorderPane {
 
         setCenter(card);
 
-
         remove.setOnAction(e -> {
             Appointment selected = appointmentTable.getSelectionModel().getSelectedItem();
             if (selected != null) {
                 AppointmentLogic.removeAppointment(selected);
-                appointmentTable.getItems().remove(selected);
-
+                appointmentTable.refresh();
                 new Alert(Alert.AlertType.INFORMATION,
                         "Appointment removed successfully!", ButtonType.OK).showAndWait();
             } else {
                 errorLabel.setText("❌ Please select an appointment to remove.");
                 errorLabel.setVisible(true);
-
                 new Alert(Alert.AlertType.ERROR,
                         "No appointment selected.", ButtonType.OK).showAndWait();
             }
@@ -74,3 +71,5 @@ public class RemoveAppointmentView extends BorderPane {
         back.setOnAction(e -> setCenter(new Label("Select an option from the menu")));
     }
 }
+
+
