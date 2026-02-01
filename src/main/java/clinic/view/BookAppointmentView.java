@@ -1,4 +1,5 @@
 package clinic.view;
+import clinic.data.DataStore;
 import clinic.logics.AppointmentLogic;
 import clinic.model.Doctor;
 import clinic.model.Patient;
@@ -26,11 +27,13 @@ public class BookAppointmentView extends BorderPane {
         patientLabel.setFont(Font.font("Segoe UI", FontWeight.SEMI_BOLD, 14));
         ComboBox<Patient> patients = new ComboBox<>();
         patients.setMaxWidth(350);
+        patients.getItems().addAll(DataStore.patients);
 
         Label doctorLabel = new Label("Doctor");
         doctorLabel.setFont(Font.font("Segoe UI", FontWeight.SEMI_BOLD, 14));
         ComboBox<Doctor> doctors = new ComboBox<>();
         doctors.setMaxWidth(350);
+        doctors.getItems().addAll(DataStore.doctors);
 
         Label dateLabel = new Label("Date");
         dateLabel.setFont(Font.font("Segoe UI", FontWeight.SEMI_BOLD, 14));
