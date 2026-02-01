@@ -1,5 +1,4 @@
 package clinic.view;
-
 import clinic.logics.AppointmentLogic;
 import clinic.model.Appointment;
 import clinic.model.Doctor;
@@ -21,7 +20,8 @@ public class UpdateAppointmentView extends BorderPane {
         title.setStyle("-fx-font-size: 24px; -fx-font-weight: bold;");
 
         TableView<Appointment> appointmentTable = new TableView<>();
-        appointmentTable.setItems(FXCollections.observableArrayList(clinic.data.DataStore.appointments));
+
+        appointmentTable.setItems(FXCollections.observableList(clinic.data.DataStore.appointments));
 
         TableColumn<Appointment, String> patientCol = new TableColumn<>("Patient");
         patientCol.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getPatient().getName()));
@@ -39,7 +39,8 @@ public class UpdateAppointmentView extends BorderPane {
         dateField.setPromptText("New Date (YYYY-MM-DD)");
 
         ComboBox<Doctor> doctorBox = new ComboBox<>();
-        doctorBox.setItems(FXCollections.observableArrayList(clinic.data.DataStore.doctors));
+        // Bind directly to the actual DataStore list
+        doctorBox.setItems(FXCollections.observableList(clinic.data.DataStore.doctors));
         doctorBox.setPromptText("Select New Doctor");
 
         Button updateBtn = new Button("Update");
