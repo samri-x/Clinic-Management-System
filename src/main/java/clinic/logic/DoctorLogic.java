@@ -6,7 +6,6 @@ import clinic.exceptions.DoctorAddingException;
 
 public class DoctorLogic {
 
-
     public static void addDoctor(String name, String spec, String username, String password) throws DoctorAddingException {
         validateDoctor(username, password);
 
@@ -17,9 +16,8 @@ public class DoctorLogic {
                 username,
                 password
         );
-        DataStore.addDoctor(d);
+        DataStore.addDoctor(d); // persists immediately
     }
-
 
     public static void updateDoctor(Doctor doctor, String newName, String newSpec) {
         if (doctor != null) {
@@ -29,12 +27,16 @@ public class DoctorLogic {
             if (newSpec != null && !newSpec.trim().isEmpty()) {
                 doctor.setSpecialization(newSpec);
             }
+            DataStore.saveDoctors(); // persist changes
+            System.out.println("Doctor updated and saved to file.");
         }
     }
 
-
     public static void removeDoctor(Doctor doctor) {
-        DataStore.doctors.remove(doctor);
+        if (doctor != null) {
+            DataStore.removeDoctor(doctor); // persist removal
+            System.out.println("Doctor removed and saved to file.");
+        }
     }
 
     // Validation for adding
