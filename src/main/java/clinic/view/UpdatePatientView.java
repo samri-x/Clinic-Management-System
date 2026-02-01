@@ -22,7 +22,8 @@ public class UpdatePatientView extends BorderPane {
         title.setFont(Font.font("Segoe UI", FontWeight.BOLD, 24));
 
         TableView<Patient> patientTable = new TableView<>();
-        patientTable.setItems(FXCollections.observableArrayList(clinic.data.DataStore.patients));
+        // Bind directly to the actual DataStore list
+        patientTable.setItems(FXCollections.observableList(clinic.data.DataStore.patients));
 
         TableColumn<Patient, String> nameCol = new TableColumn<>("Name");
         nameCol.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getName()));
@@ -68,7 +69,7 @@ public class UpdatePatientView extends BorderPane {
                             addressField.getText(),
                             bloodField.getText()
                     );
-                    patientTable.refresh();
+                    patientTable.refresh(); // redraws updated values
                     new Alert(Alert.AlertType.INFORMATION, "Patient updated successfully!", ButtonType.OK).showAndWait();
                 } catch (PatientAddingException ex) {
                     new Alert(Alert.AlertType.ERROR, ex.getMessage(), ButtonType.OK).showAndWait();
