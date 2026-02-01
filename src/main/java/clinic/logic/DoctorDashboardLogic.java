@@ -12,7 +12,7 @@ public class DoctorDashboardLogic {
     public static List<Appointment> getAppointmentsForDoctor(Doctor doctor) {
         return DataStore.appointments.stream()
                 .filter(a -> a.getDoctor().equals(doctor))
-                .collect(Collectors.toList());
+                .collect(Collectors.tolist());
     }
 
 
