@@ -13,4 +13,5 @@ public class AdminLogic {
     public static void refreshCountsLabel(javafx.scene.control.Label countsLabel) {
         countsLabel.setText(getCounts());
     }
+    
 }
