@@ -1,9 +1,11 @@
 package clinic.logics;
+
 import clinic.data.DataStore;
 import clinic.model.Patient;
 import clinic.exceptions.PatientAddingException;
 
 public class PatientLogic {
+
     public static void addPatient(String name, String ageText, String gender,
                                   String phone, String address, String bloodType) throws PatientAddingException {
         int age = validatePatient(name, ageText, gender, phone, address, bloodType);
@@ -17,15 +19,16 @@ public class PatientLogic {
                 address,
                 bloodType
         );
-        DataStore.addPatient(p);
+        DataStore.addPatient(p); // persists immediately
+        System.out.println("Patient added and saved to file.");
     }
-
 
     public static void removePatient(Patient patient) {
-        DataStore.patients.remove(patient);
+        if (patient != null) {
+            DataStore.removePatient(patient); // updates list AND saves CSV
+            System.out.println("Patient removed and saved to file.");
+        }
     }
-
-
 
     public static void updatePatient(Patient patient, String newName, String newAgeText,
                                      String newGender, String newPhone,
@@ -58,6 +61,10 @@ public class PatientLogic {
         if (newBloodType != null && !newBloodType.trim().isEmpty()) {
             patient.setBloodType(newBloodType);
         }
+
+        // Persist changes
+        DataStore.savePatients();
+        System.out.println("Patient updated and saved to file.");
     }
 
     // Validation for adding
