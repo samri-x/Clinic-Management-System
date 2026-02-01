@@ -26,6 +26,7 @@ public class LoginView extends BorderPane {
         centerBox.setStyle("-fx-background-color: white; -fx-background-radius: 12; "
                 + "-fx-border-radius: 12; -fx-border-color: #cbd5e0; -fx-border-width: 1; "
                 + "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 10,0,0,4);");
+        
 
         Label title = new Label("Clinic Login");
         title.setFont(Font.font("Segoe UI", FontWeight.BOLD, 32));
