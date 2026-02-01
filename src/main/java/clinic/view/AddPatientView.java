@@ -84,7 +84,7 @@ public class AddPatientView extends BorderPane {
 
             } catch (PatientAddingException ex) {
                 errorLabel.setText("❌ " + ex.getMessage());
-                errorLabel.setVisible(true);
+                errorLable.setVisible(true);
                 new Alert(Alert.AlertType.ERROR, ex.getMessage(), ButtonType.OK).showAndWait();
             }
         });
